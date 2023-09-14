@@ -15,7 +15,7 @@
 <body>
 
 <div class="container bg-light w-50 h-100 mt-5 text-center">
-<h1 class="text-uppercase text-center">PIZZE</h1>
+<h1 class="text-uppercase text-center text-decoration-underline m-3">pizze</h1>
     <div  th:if="${pizza.size()>0}" >
     <div th:each="pizza : ${pizza}" class="card">
         <img th:src="${pizza.image}" alt="pizza image">
