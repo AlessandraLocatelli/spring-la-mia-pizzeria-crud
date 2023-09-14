@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/pizza")
+@RequestMapping("/")
 public class PizzaController {
 
 @Autowired
@@ -25,7 +25,7 @@ public String index(Model model)
     List<Pizza> pizzaList = pizzaRepository.findAll();
     model.addAttribute("pizza",pizzaList);
 
-    return "pizza/pizza-list";
+    return "pizza/index";
 }
 
 
