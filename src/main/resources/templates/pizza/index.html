@@ -15,17 +15,25 @@
 <body>
 
 <div class="container bg-light w-50 h-100 mt-5 text-center text-uppercase">
-<h1 class="m-3">pizze</h1>
+<h1 class="m-3">menu</h1>
+    <hr>
     <div  th:if="${pizza.size()>0}" >
     <div th:each="pizza : ${pizza}" class="card">
         <img th:src="${pizza.image}" alt="pizza image">
         <div class="card-body">
             <h5 th:text="${pizza.name}"class="card-title"></h5>
-            <a th:href="@{/show/{id}(id=${pizza.id})}" class="btn btn-danger">Dettagli</a>
+            <a th:href="@{/show/{id}(id=${pizza.id})}" class="btn btn-danger">Details</a>
         </div>
     </div>
     </div>
     <div class="alert alert-info" th:unless="${pizza.size()>0}">The List is Empty</div>
+
+    <div class="p-3">
+
+        <a class="btn btn-danger" th:href="@{/create}">Create your pizza</a>
+
+    </div>
+
 </div>
 
 

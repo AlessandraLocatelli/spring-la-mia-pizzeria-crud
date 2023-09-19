@@ -1,6 +1,8 @@
 package org.learning.springlamiapizzeriacrud.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import org.hibernate.validator.constraints.URL;
 
 import java.math.BigDecimal;
 
@@ -12,16 +14,23 @@ public class Pizza {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
+    @NotBlank(message = "name cannot be empty.")
+    @Size(max= 255)
     private String name;
 
+    @NotBlank(message = "description cannot be empty.")
+    @Size(max= 255)
     @Column(columnDefinition = "tinytext")
     private String description;
 
-    @Column( columnDefinition = "decimal(5,2)" , nullable = false)
+    @DecimalMax(value = "20.00", message = "price cannot be higher than 20€.")
+    @DecimalMin(value = "5.00", message = "price cannot be less than 5€.")
+    @Digits(integer = 4, fraction = 2, message= "max four digits")
+    @Column( columnDefinition = "decimal(4,2)" , nullable = false)
     private BigDecimal price;
 
-    @Column(nullable = false)
+    @URL(message = "Insert an url.")
+    @NotBlank(message = "insert url image")
     private String image;
 
     public Integer getId()

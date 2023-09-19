@@ -17,13 +17,13 @@
 <body>
 <div class="container bg-light w-50 h-100 mt-5 text-center">
     <h1 th:text="${pizza.name}" class="text-uppercase m-3"></h1>
-
+    <hr>
         <div class="card">
             <img th:src="${pizza.image}" alt="pizza image">
             <div class="card-body">
                 <p th:text="${pizza.description}" class="card-text"></p>
                 <p th:text="|${pizza.price}€|" class="card-text"></p>
-                <a th:href="@{/}" class="btn btn-danger">Ritorna al menu principale</a>
+                <a th:href="@{/}" class="btn btn-danger">Menu</a>
             </div>
         </div>
 
