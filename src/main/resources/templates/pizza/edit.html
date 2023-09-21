@@ -1,20 +1,18 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
-
-<head th:replace="fragments/head :: head('Create Your Pizza')"></head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head('Edit Your Pizza')"></head>
 
 <body>
-
 <div class="container bg-light w-50 h-100 mt-5">
 
-    <h1 class="m-2 text-center">CREATE YOUR PIZZA</h1>
+    <h1 class="m-2 text-center">EDIT YOUR PIZZA</h1>
     <hr>
 
     <form
-    id ="pizza-form"
-    th:action="@{/create}"
-    th:object ="${pizza}"
-    method="post"
+            id ="pizza-edit"
+            th:action="@{/edit/{id}(id=${pizza.id})}"
+            th:object ="${pizza}"
+            method="post"
     >
 
         <div class="m-2">
@@ -32,7 +30,7 @@
         <div class="m-2">
             <label for="description" class="form-label">Description</label>
             <input type="text" class="form-control" id="description" th:field="*{description}" required
-            th:errorClass="is-invalid">
+                   th:errorClass="is-invalid">
             <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}">
                 <ul>
 
@@ -69,7 +67,7 @@
         </div>
 
         <div class="m-3 p-2">
-            <button type="submit" class="btn btn-danger">Create</button>
+            <button type="submit" class="btn btn-danger">Edit</button>
             <a class="btn btn-danger" th:href="@{/}">Cancel</a>
         </div>
 

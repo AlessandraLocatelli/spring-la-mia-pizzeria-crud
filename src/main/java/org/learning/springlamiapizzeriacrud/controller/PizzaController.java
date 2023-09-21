@@ -4,7 +4,6 @@ import jakarta.validation.Valid;
 import org.learning.springlamiapizzeriacrud.model.Pizza;
 import org.learning.springlamiapizzeriacrud.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,6 +69,46 @@ public class PizzaController {
 
         pizzaRepository.save(formPizza);
 
+
+        return "redirect:/";
+    }
+
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable Integer id, Model model)
+    {
+
+      Optional<Pizza> result =  pizzaRepository.findById(id);
+
+      if(result.isPresent())
+      {
+          model.addAttribute("pizza",result.get());
+          return "pizza/edit";
+      }
+
+
+       throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("/edit/{id}")
+    public String doEdit(@Valid @ModelAttribute("pizza") Pizza formPizza,BindingResult bindingResult)
+    {
+
+        if(bindingResult.hasErrors())
+        {
+
+            return "pizza/edit";
+        }
+
+        pizzaRepository.save(formPizza);
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String doDelete(@PathVariable Integer id)
+    {
+        pizzaRepository.deleteById(id);
 
         return "redirect:/";
     }
