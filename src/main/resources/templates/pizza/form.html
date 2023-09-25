@@ -7,12 +7,12 @@
 
 <div class="container bg-light w-50 h-100 mt-5">
 
-    <h1 class="m-2 text-center">CREATE YOUR PIZZA</h1>
+    <h1 class="m-2 text-center" th:text="${pizza.id != null ? 'EDIT YOUR PIZZA' : 'CREATE YOUR PIZZA' }" ></h1>
     <hr>
 
     <form
     id ="pizza-form"
-    th:action="@{/create}"
+    th:action="${pizza.id != null} ? @{/edit/{id}(id = ${pizza.id})} : @{/create}"
     th:object ="${pizza}"
     method="post"
     >

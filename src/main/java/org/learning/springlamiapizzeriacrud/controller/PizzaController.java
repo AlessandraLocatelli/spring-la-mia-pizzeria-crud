@@ -23,10 +23,22 @@ public class PizzaController {
 
 
     @GetMapping()
-    public String index(Model model) {
+    public String index(Model model, @RequestParam("keyword") Optional<String> searchKeyword) {
 
-        List<Pizza> pizzaList = pizzaRepository.findAll();
+        List<Pizza> pizzaList;
+        String keyword = "";
+
+        if(searchKeyword.isPresent())
+        {   keyword = searchKeyword.get();
+            pizzaList = pizzaRepository.findByNameContaining(keyword);
+        }
+        else{
+            pizzaList = pizzaRepository.findAll();
+        }
+
         model.addAttribute("pizza", pizzaList);
+        model.addAttribute("keyword", keyword);
+
 
         return "pizza/index";
     }
@@ -83,7 +95,7 @@ public class PizzaController {
       if(result.isPresent())
       {
           model.addAttribute("pizza",result.get());
-          return "pizza/edit";
+          return "pizza/form";
       }
 
 
@@ -97,7 +109,7 @@ public class PizzaController {
         if(bindingResult.hasErrors())
         {
 
-            return "pizza/edit";
+            return "pizza/form";
         }
 
         pizzaRepository.save(formPizza);
