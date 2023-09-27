@@ -5,6 +5,7 @@ import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.URL;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 
 @Entity
@@ -33,6 +34,9 @@ public class Pizza {
     @URL(message = "Insert an url.")
     @NotBlank(message = "insert url image")
     private String image;
+
+    @OneToMany (mappedBy = "pizza", cascade = {CascadeType.REMOVE})
+    private List<Offer> offers;
 
     public Integer getId()
     {
@@ -75,5 +79,14 @@ public class Pizza {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+
+    public List<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
     }
 }
