@@ -35,15 +35,23 @@
             </thead>
             <tbody>
 
-            <tr th:each="offer : ${pizza.offers}">
+            <tr th:each="offer : ${pizza.offers}"
+                th:classAppend="${offer.isExpired ? 'table-danger' : ''}"
+            >
+
                 <td th:text="${offer.title}"></td>
                 <td th:text="${offer.startDate}"></td>
                 <td th:text="${offer.endDate}"></td>
                 <td class="d-flex align-items-center justify-content-end">
-                    <a th:href="@{/specialoffers/edit/{offerId}(offerId=${offer.id})}"
-                       class="btn btn-danger me-1">
+
+                    <a      th:if="${!offer.isExpired}"
+                            th:href="@{/specialoffers/edit/{offerId}(offerId=${offer.id})}"
+                            class="btn btn-danger me-1"
+                    >
                         <i class="fa-solid fa-pen-to-square"></i>
                     </a>
+
+
                     <form th:action="@{/specialoffers/delete/{offerId}(offerId = ${offer.id})}"
                           method="POST">
                         <button type="submit" class="btn btn-danger">

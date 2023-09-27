@@ -3,6 +3,7 @@ package org.learning.springlamiapizzeriacrud.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 
 import java.time.LocalDate;
@@ -19,10 +20,10 @@ public class Offer {
     @NotBlank
     private String title;
 
-    @PastOrPresent
+
     private LocalDate startDate;
 
-    @Future
+
     private LocalDate endDate;
 
     @ManyToOne
@@ -67,4 +68,17 @@ public class Offer {
     public void setTitle(String title) {
         this.title = title;
     }
+
+
+    public boolean isExpired()
+    {
+
+        return endDate.isBefore(LocalDate.now());
+
+    }
+
+
+
+
 }
+
